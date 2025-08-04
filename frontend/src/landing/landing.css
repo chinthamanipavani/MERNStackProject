@@ -1,0 +1,399 @@
+.company-section {
+  text-align: center;
+  margin-top: 40px;
+  overflow: hidden;
+}
+
+.company-logos-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.company-logos {
+  display: flex;
+  animation: scrollLoop 20s linear infinite;
+  width: fit-content;
+}
+
+.company-logos:hover {
+  animation-play-state: paused;
+}
+
+.company-logos div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 40px;
+  white-space: nowrap;
+}
+
+.company-logos img {
+  width: 200px;
+  height: 200px;
+}
+
+/* Keyframes for seamless infinite loop */
+@keyframes scrollLoop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+/* 3 */
+.job-category {
+  padding: 40px;
+  background-color: #f5f7fa;
+  text-align: center;
+}
+
+.job-category h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.job-category .sub-text {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.category-card {
+  background-color: #fff;
+  padding: 20px;
+  width: 250px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+}
+
+.icon {
+  font-size: 40px;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.category-card h2 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  color: #222;
+}
+
+.category-card p {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 5px 0;
+}
+/* 4 */
+.process-section {
+  padding: 40px;
+  text-align: center;
+  background-color: #f7f7f7;
+}
+
+.process-section h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.process-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 90px;
+}
+
+.process-logo {
+  width: 550px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.step-card {
+  display: flex;
+  align-items: center; /* Align icon and text vertically */
+  gap: 15px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.step-card i {
+  font-size: 2.1rem;
+  color: #007bff;
+  min-width: 40px;
+  text-align: center;
+}
+
+.step-card h3,
+.step-card p {
+  margin: 0;
+  color: #444;
+}
+
+.step-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.step-card p {
+  font-size: 1rem;
+}
+/* footer */
+
+.footer {
+  background-color: #000;
+  padding: 40px 20px;
+  color: #fff;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-column {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #fff;
+}
+
+.footer-description {
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 250px;
+  color: #ccc;
+}
+
+.footer-icons {
+  margin-top: 12px;
+}
+
+.footer-icons i {
+  font-size: 20px;
+  margin-right: 12px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footer-icons i:hover {
+  color: #0d6efd;
+}
+
+.footer-column a {
+  text-decoration: none;
+  color: #ccc;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.footer-column a:hover {
+  color: #0d6efd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* fetching jobs  */
+/* Base Styles */
+.job-page-container {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+}
+
+/* Job Cards Grid */
+.job-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Individual Job Card */
+.job-card {
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(145deg, #f9f9f9, #e0e0e0);
+}
+
+/* Image Styling */
+.job-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Title and Text */
+.job-card h3 {
+  color: #007acc;
+  margin-top: 12px;
+  font-size: 20px;
+}
+
+.job-card p {
+  font-size: 14px;
+  color: #444;
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+/* Apply Now Button */
+.apply-button {
+  display: inline-block;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #1e90ff, #00bfff);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(30, 144, 255, 0.4);
+}
+
+.apply-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(30, 144, 255, 0.6);
+}
+
+/* Official Website Link Button */
+.official-button, .website-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #007bff;
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  text-decoration: underline;
+  font-weight: 500;
+  font-style: italic;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.official-button:hover, .website-link:hover {
+  color: #0056b3;
+  transform: scale(1.03);
+  text-decoration: none;
+  font-style: italic;
+}
+
+/* Pagination Styling */
+.pagination {
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 10px;
+  padding: 6px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .job-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .job-list {
+    grid-template-columns: 1fr;
+  }
+
+  .job-card {
+    padding: 15px;
+  }
+
+  .apply-button, .official-button {
+    width: 100%;
+    text-align: center;
+  }
+}
