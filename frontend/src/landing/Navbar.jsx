@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.jpg";
-import { Link as ScrollLink } from "react-scroll";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -26,61 +25,97 @@ const Navbar = () => {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <ScrollLink
-                  to="home"
-                  smooth={true}
-                  duration={300}
-                  offset={-70}
-                  className="nav-link"
+            <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li className="nav-item me-3">
+                <button
+                  onClick={() => navigate("/")}
+                  className="nav-link btn btn-link"
+                  style={{ border: "none", background: "none" }}
                 >
                   Home
-                </ScrollLink>
+                </button>
               </li>
-              <li className="nav-item">
-                <ScrollLink
-                  to="about"
-                  smooth={true}
-                  duration={300}
-                  offset={-70}
-                  className="nav-link"
-                >
-                  About
-                </ScrollLink>
-              </li>
-              <li className="nav-item">
-                <ScrollLink
-                  to="services"
-                  smooth={true}
-                  duration={300}
-                  offset={-70}
-                  className="nav-link"
+              <li className="nav-item me-3">
+                <button
+                  onClick={() => {
+                    navigate("/");
+                    setTimeout(() => {
+                      const element = document.getElementById("services");
+                      if (element) {
+                        window.scrollTo({
+                          top: element.offsetTop,
+                          behavior: "smooth",
+                        });
+                      }
+                    }, 100);
+                  }}
+                  className="nav-link btn btn-link"
+                  style={{ border: "none", background: "none" }}
                 >
                   Services
-                </ScrollLink>
+                </button>
               </li>
-              <li className="nav-item">
-                <ScrollLink
-                  to="review"
-                  smooth={true}
-                  duration={300}
-                  offset={-70}
-                  className="nav-link"
+              <li className="nav-item me-3">
+                <button
+                  onClick={() => {
+                    navigate("/");
+                    setTimeout(() => {
+                      const element = document.getElementById("about");
+                      if (element) {
+                        window.scrollTo({
+                          top: element.offsetTop,
+                          behavior: "smooth",
+                        });
+                      }
+                    }, 100);
+                  }}
+                  className="nav-link btn btn-link"
+                  style={{ border: "none", background: "none" }}
                 >
-                  Review
-                </ScrollLink>
+                  About
+                </button>
               </li>
-              <li className="nav-item">
-                <ScrollLink
-                  to="contact"
-                  smooth={true}
-                  duration={300}
-                  offset={-70}
-                  className="nav-link"
+              <li className="nav-item me-3">
+                <button
+                  onClick={() => {
+                    navigate("/");
+                    setTimeout(() => {
+                      const element = document.getElementById("contact");
+                      if (element) {
+                        window.scrollTo({
+                          top: element.offsetTop,
+                          behavior: "smooth",
+                        });
+                      }
+                    }, 100);
+                  }}
+                  className="nav-link btn btn-link"
+                  style={{ border: "none", background: "none" }}
                 >
                   Contact
-                </ScrollLink>
+                </button>
+              </li>
+            
+         
+              <li className="nav-item">
+                <button
+                  onClick={() => {
+                    navigate("/");
+                    setTimeout(() => {
+                      const element = document.getElementById("companies");
+                      if (element) {
+                        window.scrollTo({
+                          top: element.offsetTop,
+                          behavior: "smooth",
+                        });
+                      }
+                    }, 100);
+                  }}
+                  className="nav-link btn btn-link"
+                  style={{ border: "none", background: "none" }}
+                >
+                  Companies
+                </button>
               </li>
             </ul>
 

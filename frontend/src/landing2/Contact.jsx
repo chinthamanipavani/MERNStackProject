@@ -93,7 +93,7 @@ const Contact = () => {
   };
 
   return (
-    <div style={styles.container}>
+    <div id="contact" style={styles.container}>
       <h1 style={styles.header}>Contact</h1>
       <p style={styles.subHeader}>
         We'd love to hear from you! Whether you have a question, feedback, or

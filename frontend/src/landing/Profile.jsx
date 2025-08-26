@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
-  const loggedInEmail = localStorage.getItem("currentUserEmail");
+  const loggedInEmail = localStorage.getItem("userEmail");
 
   const [profileData, setProfileData] = useState({
     firstName: "",
@@ -85,26 +85,32 @@ const Profile = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2>{savedData ? "Your Profile" : "Profile Settings"}</h2>
+    <>
+    
+    <div style={styles.pageBackground}>
+      <div style={styles.container}>
+      <h2 style={styles.header}>{savedData ? "Your Profile" : "Profile Settings"}</h2>
       {error && <p style={styles.error}>{error}</p>}
 
-      {photoPreview ? (
-        <img src={photoPreview} alt="Profile" style={styles.image} />
-      ) : (
-        <div style={styles.avatar}>👤</div>
-      )}
-      <br />
-      <button onClick={triggerFileInput}>Update Profile Photo</button>
-      <br />
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*"
-        style={{ display: "none" }}
-        onChange={handleChange}
-        name="photo"
-      />
+      <div style={styles.imageContainer}>
+        {photoPreview ? (
+          <img src={photoPreview} alt="Profile" style={styles.image} />
+        ) : (
+          <div style={styles.avatar}>👤</div>
+        )}
+        <br />
+        <button onClick={triggerFileInput} style={styles.uploadButton}>
+          Update Profile Photo
+        </button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={handleChange}
+          name="photo"
+        />
+      </div>
 
       {!savedData || isEditingDetails ? (
         <form onSubmit={handleSubmit} style={styles.form}>
@@ -114,6 +120,7 @@ const Profile = () => {
             value={profileData.firstName}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="surname"
@@ -121,6 +128,7 @@ const Profile = () => {
             value={profileData.surname}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="phone"
@@ -128,6 +136,7 @@ const Profile = () => {
             value={profileData.phone}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="address1"
@@ -135,6 +144,7 @@ const Profile = () => {
             value={profileData.address1}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="address2"
@@ -142,6 +152,7 @@ const Profile = () => {
             value={profileData.address2}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="postcode"
@@ -149,6 +160,7 @@ const Profile = () => {
             value={profileData.postcode}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="state"
@@ -156,6 +168,7 @@ const Profile = () => {
             value={profileData.state}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="area"
@@ -163,6 +176,7 @@ const Profile = () => {
             value={profileData.area}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="email"
@@ -170,6 +184,7 @@ const Profile = () => {
             value={profileData.email}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="education"
@@ -177,6 +192,7 @@ const Profile = () => {
             value={profileData.education}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="country"
@@ -184,6 +200,7 @@ const Profile = () => {
             value={profileData.country}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="region"
@@ -191,6 +208,7 @@ const Profile = () => {
             value={profileData.region}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <input
             name="experience"
@@ -198,6 +216,7 @@ const Profile = () => {
             value={profileData.experience}
             onChange={handleChange}
             required
+            style={styles.input}
           />
           <textarea
             name="additional"
@@ -205,8 +224,9 @@ const Profile = () => {
             value={profileData.additional}
             onChange={handleChange}
             rows={3}
+            style={styles.textarea}
           />
-          <button type="submit">Save Profile</button>
+          <button type="submit" style={styles.submitButton}>Save Profile</button>
         </form>
       ) : (
         <div>
@@ -239,23 +259,41 @@ const Profile = () => {
           <p>
             <strong>Additional:</strong> {savedData.additional}
           </p>
-          <button onClick={() => setIsEditingDetails(true)}>
+          <button onClick={() => setIsEditingDetails(true)} style={styles.submitButton}>
             Update Details
           </button>
         </div>
       )}
+      </div>
     </div>
+    </>
+    
   );
 };
 
 const styles = {
-  container: {
-    maxWidth: "500px",
-    margin: "0 auto",
+  pageBackground: {
+    minHeight: "100vh",
+    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
     padding: "20px",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    fontFamily: "Arial",
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+  },
+  container: {
+    maxWidth: "600px",
+    margin: "0 auto",
+    padding: "30px",
+    background: "rgba(255, 255, 255, 0.1)",
+    borderRadius: "15px",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+    backdropFilter: "blur(10px)",
+    color: "white",
+  },
+  header: {
+    textAlign: "center",
+    marginBottom: "30px",
+    fontSize: "28px",
+    fontWeight: "bold",
+    textShadow: "2px 2px 4px rgba(0,0,0,0.3)",
   },
   form: {
     display: "flex",
@@ -263,8 +301,11 @@ const styles = {
     gap: "10px",
     marginTop: "10px",
   },
-  inputFile: {
-    marginBottom: "10px",
+  imageContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginBottom: "20px",
   },
   image: {
     width: "100px",
@@ -277,16 +318,62 @@ const styles = {
     width: "100px",
     height: "100px",
     borderRadius: "50%",
-    backgroundColor: "#ddd",
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontSize: "40px",
     marginBottom: "10px",
   },
+  uploadButton: {
+    marginTop: "10px",
+    padding: "8px 15px",
+    border: "none",
+    borderRadius: "6px",
+    background: "rgba(255, 255, 255, 0.2)",
+    color: "white",
+    cursor: "pointer",
+    transition: "all 0.3s ease",
+    fontSize: "14px",
+  },
+  input: {
+    padding: "12px 15px",
+    border: "none",
+    borderRadius: "8px",
+    background: "rgba(255, 255, 255, 0.9)",
+    fontSize: "14px",
+    transition: "all 0.3s ease",
+    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+  },
+  textarea: {
+    padding: "12px 15px",
+    border: "none",
+    borderRadius: "8px",
+    background: "rgba(255, 255, 255, 0.9)",
+    fontSize: "14px",
+    transition: "all 0.3s ease",
+    resize: "vertical",
+    minHeight: "80px",
+    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+  },
   error: {
-    color: "red",
-    marginBottom: "10px",
+    color: "#ff6b6b",
+    marginBottom: "15px",
+    textAlign: "center",
+    fontWeight: "bold",
+    textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+  },
+  submitButton: {
+    padding: "12px 20px",
+    border: "none",
+    borderRadius: "8px",
+    background: "rgba(255, 255, 255, 0.2)",
+    color: "white",
+    cursor: "pointer",
+    transition: "all 0.3s ease",
+    fontSize: "16px",
+    fontWeight: "bold",
+    marginTop: "10px",
   },
 };
 

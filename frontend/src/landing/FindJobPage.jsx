@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const FindJobPage = () => {
   const [jobs, setJobs] = useState([]);
   const [error, setError] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 8;
+  const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState(location.state?.searchTerm || "");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // Check for token
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login"); // Redirect to login if no token
+      return;
+    }
+    
     const fetchJobs = async () => {
       try {
         const res1 = await fetch("http://localhost:3000/defaultJobs");
@@ -26,33 +35,31 @@ const FindJobPage = () => {
     };
 
     fetchJobs();
-  }, []);
+  }, [navigate]);
 
-  // Pagination logic
-  const indexOfLastJob = currentPage * jobsPerPage;
-  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-  const currentJobs = jobs.slice(indexOfFirstJob, indexOfLastJob);
+  // Filter jobs using searchTerm
+  const filteredJobs = jobs.filter((job) => {
+    const term = searchTerm.toLowerCase();
+    return (
+      job.companyName?.toLowerCase().includes(term) ||
+      job.jobTitle?.toLowerCase().includes(term) ||
+      (Array.isArray(job.skills) ? job.skills.join(', ').toLowerCase().includes(term) : false) ||
+      job.city?.toLowerCase().includes(term) ||
+      job.location?.toLowerCase().includes(term) ||
+      job.state?.toLowerCase().includes(term)
+    );
+  });
 
-  const nextPage = () => {
-    if (currentPage < Math.ceil(jobs.length / jobsPerPage)) {
-      setCurrentPage((prev) => prev + 1);
-    }
-  };
-
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-  };
-  console.log(currentJobs);
+  console.log(filteredJobs);
 
   return (
     <div className="job-page-container">
       <h2>Available Jobs</h2>
       {error && <p className="error">{error}</p>}
 
+
       <div className="job-list">
-        {currentJobs.map((job) => (
+        {filteredJobs.map((job) => (
           <div key={job._id} className="job-card">
             <img src={job.imageurl || job.longitude} alt="Company" /> <br />
             {/* Official Website button */}
@@ -84,26 +91,17 @@ const FindJobPage = () => {
                 to={job.joblink}
                 target="_blank"
                 rel="noopener noreferrer"
+                style={{ marginRight: "10px" }}
               >
                 Apply Now
               </Link>
             )}
+            
           </div>
         ))}
       </div>
 
-      <div className="pagination">
-        <button onClick={prevPage} disabled={currentPage === 1}>
-          ⬅ Previous
-        </button>
-        <span>Page {currentPage}</span>
-        <button
-          onClick={nextPage}
-          disabled={currentPage >= Math.ceil(jobs.length / jobsPerPage)}
-        >
-          Next ➡
-        </button>
-      </div>
+      {/* Remove Pagination */}
     </div>
   );
 };

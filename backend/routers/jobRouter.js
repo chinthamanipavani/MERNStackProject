@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { createJob, getAllJobs } = require("../controllers/jobController");
 const DefaultJob = require("../models/defaultJobModel"); // Assuming you have a model
+const { verifyToken } = require("../middleware/authMiddleware");
 
 // Normal job routes
-router.post("/create", createJob);
+router.post("/create", verifyToken, createJob);
 router.get("/", getAllJobs);
 
 // Add defaultJobs route here

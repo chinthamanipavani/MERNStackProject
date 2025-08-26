@@ -105,7 +105,7 @@ const Review = () => {
   };
 
   return (
-    <div style={styles.container} ref={sectionRef}>
+    <div id="review" style={styles.container} ref={sectionRef}>
       <h2 style={styles.heading}>What People Say About Find Your Job</h2>
       <div style={styles.reviewsGrid}>
         {reviews.map((review, index) => (

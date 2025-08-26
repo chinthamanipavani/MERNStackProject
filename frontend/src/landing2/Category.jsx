@@ -1,6 +1,6 @@
 import React from "react";
 
-const Category = () => {
+const Category = ({ id }) => {
   const categories = [
     {
       icon: "bi-code-slash",
@@ -44,15 +44,35 @@ const Category = () => {
       jobsPosted: "220+ IT jobs available",
       bgColor: "#ede7f6",
     },
+    {
+      icon: "bi-people-fill",
+      title: "Human Resources",
+      description: "Hire, train, and manage organization talent.",
+      jobsPosted: "150+ HR roles open",
+      bgColor: "#fff3e0",
+    },
+    {
+      icon: "bi-currency-dollar",
+      title: "Finance",
+      description: "Analyze budgets, investments, and reports.",
+      jobsPosted: "200+ openings today",
+      bgColor: "#f1f8e9",
+    },
   ];
 
   const grouped = [];
-  for (let i = 0; i < categories.length; i += 3) {
-    grouped.push(categories.slice(i, i + 3));
+  for (let i = 0; i < categories.length; i += 4) {
+    grouped.push(categories.slice(i, i + 4));
   }
 
+  const handleCategoryClick = (index) => {
+    const carousel = document.getElementById("categoryCarousel");
+    const carouselInstance = new window.bootstrap.Carousel(carousel);
+    carouselInstance.to(index);
+  };
+
   return (
-    <div className="container py-5">
+    <div id={id} className="container py-5">
       {/* Inline styles to override carousel arrow color */}
       <style>{`
   .carousel-control-prev,
@@ -99,8 +119,16 @@ const Category = () => {
   .carousel-control-next {
     right: -30px;
   }
-}
+  }
 
+  .category-card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
   }
 `}</style>
 
@@ -122,10 +150,11 @@ const Category = () => {
             >
               <div className="row justify-content-center">
                 {group.map((cat, index) => (
-                  <div className="col-md-4 mb-3" key={index}>
+                  <div className="col-md-3 mb-3" key={index}>
                     <div
-                      className="card h-100 text-center shadow"
+                      className="card h-100 text-center shadow category-card"
                       style={{ backgroundColor: cat.bgColor }}
+                      onClick={() => handleCategoryClick(idx)}
                     >
                       <div className="card-body">
                         <i

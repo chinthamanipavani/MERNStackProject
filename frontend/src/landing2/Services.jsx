@@ -75,7 +75,7 @@ const Services = () => {
   }, []);
 
   return (
-    <div style={{ backgroundColor: "#f5f7fa" /* full-width background */ }}>
+    <div id="services" style={{ backgroundColor: "#f5f7fa" /* full-width background */ }}>
       <div className="services-container">
         <style>{`
 .services-container {

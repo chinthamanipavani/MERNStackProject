@@ -46,7 +46,7 @@ const aboutStyles = {
 
 const About = () => {
   return (
-    <div style={aboutStyles.container}>
+    <div id="about" style={aboutStyles.container}>
       <div style={aboutStyles.hero}>
         <h1 style={aboutStyles.heading}>About Find Your Job</h1>
         <p style={aboutStyles.subheading}>Your Career Starts Here </p>

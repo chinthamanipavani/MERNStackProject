@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // 👈 import Link if you're using it
+import { Link, useNavigate } from "react-router-dom";
 
-const BasicJobs = () => {
+const BasicJobs = ({ id, searchTerm = "" }) => {
   const [jobs, setJobs] = useState([]);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -20,34 +22,48 @@ const BasicJobs = () => {
     };
     fetchJobs();
   }, []);
-  console.log(jobs);
+  // Filter jobs based on search term
+  const filteredJobs = jobs.filter((job) => {
+    if (!searchTerm) return true;
+    
+    const term = searchTerm.toLowerCase();
+    return (
+      job.jobTitle?.toLowerCase().includes(term) ||
+      job.companyName?.toLowerCase().includes(term) ||
+      job.city?.toLowerCase().includes(term) ||
+      job.state?.toLowerCase().includes(term) ||
+      (Array.isArray(job.skills) ? job.skills.join(', ').toLowerCase().includes(term) : false)
+    );
+  });
+
+  console.log(filteredJobs);
+
   return (
-    <div className="job-page-container">
+    <div className="job-page-container" id={id}>
       <h2>Available Jobs</h2>
       {error && <p className="error">{error}</p>}
 
       <div className="job-list">
-        {jobs.slice(0, 8).map((job) => (
-          <Link
-            to="/moredetails"
-            state={{ job }}
+        {filteredJobs.slice(0, 4).map((job) => (
+          <div
             key={job._id}
-            className="job-card-link"
+            className="card mb-3"
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            <div className="job-card">
+            <div className="job-card" id={job.jobTitle?.toLowerCase()}>
               <img src={job.imageurl || job.longitude} alt="Company" />
               <br />
               {job.website && (
-                <a
+                <button
                   className="official-button"
-                  href={job.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()} // Prevent navigation when clicking link inside card
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(job.website, '_blank', 'noopener,noreferrer');
+                  }}
+                  style={{ border: "none" }}
                 >
                   Official Website
-                </a>
+                </button>
               )}
               <h3>{job.companyName}</h3>
               <p>
@@ -62,20 +78,47 @@ const BasicJobs = () => {
               </p>
               <p>{job.jobDescription?.slice(0, 100)}...</p>
               {job.joblink && (
-                <a
+                <button
                   className="apply-button"
-                  href={job.joblink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()} // Prevent card click from overriding this link
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(job.joblink, '_blank', 'noopener,noreferrer');
+                  }}
+                  style={{ marginRight: "10px" }}
                 >
                   Apply Now
-                </a>
+                </button>
               )}
+              <Link
+                to="/moredetails"
+                state={{ job }}
+                className="btn btn-primary"
+              >
+                View Details
+              </Link>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
+
+      {jobs.length > 4 && (
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <button
+            style={{
+              padding: "9px",
+              color: "white",
+              background: "blue",
+              borderRadius: "5px",
+              border: "none",
+              cursor: "pointer",
+            }}
+            className="see-more-button"
+            onClick={() => navigate("/findjob")}
+          >
+            See More Jobs
+          </button>
+        </div>
+      )}
     </div>
   );
 };

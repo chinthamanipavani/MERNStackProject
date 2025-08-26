@@ -38,12 +38,12 @@ const Banner = () => {
             Jobs in one place.
           </p>
           <form>
-            <input
+            {/* <input
               type="search"
               name="search"
               placeholder="Search here"
               style={styles.input}
-            />
+            /> */}
           </form>
         </div>
         <div style={styles.bannerImage}>
@@ -52,7 +52,7 @@ const Banner = () => {
       </div>
 
       {/* Company section with full browser width background */}
-      <div style={styles.fullWidthBg}>
+      <div id="companies" style={styles.fullWidthBg}>
         <div className="company-section">
           <h2>Trusted by 5000+ Companies</h2>
           <br />
@@ -83,9 +83,6 @@ const Banner = () => {
       <Element name="services">
         <Services />
       </Element>
-
-     
-
       <Element name="about">
         <About />
       </Element>
@@ -97,8 +94,6 @@ const Banner = () => {
       <Element name="contact">
         <Contact />
       </Element>
-      {/* <Animated /> */}
-      <Footer />
     </>
   );
 };

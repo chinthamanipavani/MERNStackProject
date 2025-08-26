@@ -51,14 +51,16 @@ const Login = () => {
 
       const result = await res.json();
       const role = result?.matchedObj?.role;
+      const token = result?.token;
 
       // Clear old user info
       Object.keys(localStorage).forEach((key) => {
         if (key.startsWith("profile_")) localStorage.removeItem(key);
       });
 
-      localStorage.setItem("currentUserEmail", data.email);
+      localStorage.setItem("userEmail", data.email);
       localStorage.setItem("currentUserRole", role);
+      localStorage.setItem("token", token);
 
       alert("Login successful");
       if (role === "jobseeker") {
@@ -76,7 +78,7 @@ const Login = () => {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div
         style={{
           minHeight: "100vh",

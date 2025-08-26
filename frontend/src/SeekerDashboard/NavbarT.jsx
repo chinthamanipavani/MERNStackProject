@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../images/logo.jpg";
 import { Link as ScrollLink } from "react-scroll";
 
-const NavbarT = () => {
+const NavbarT = ({ setSearchTerm }) => {
+  const [localSearchTerm, setLocalSearchTerm] = useState("");
   const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchTerm(localSearchTerm);
+
+    navigate("/findjob", { state: { searchTerm: localSearchTerm } });
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
@@ -34,69 +42,94 @@ const NavbarT = () => {
 
         {/* Navbar Content */}
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <ScrollLink
-                to="about"
-                smooth={true}
-                duration={500}
-                className="nav-link"
-                style={{ cursor: "pointer" }}
-              >
-                About
-              </ScrollLink>
+              <Link to="/seeker" className="nav-link">
+                Home
+              </Link>
             </li>
             <li className="nav-item">
-              <ScrollLink
-                to="category"
-                smooth={true}
-                duration={500}
-                className="nav-link"
-                style={{ cursor: "pointer" }}
+              <button
+                onClick={() => {
+                  const element = document.getElementById("category");
+                  if (element) {
+                    window.scrollTo({
+                      top: element.offsetTop,
+                      behavior: "smooth",
+                      top: element.offsetTop,
+                      behavior: "smooth",
+                    });
+                  }
+                }}
+                className="nav-link btn btn-link"
+                style={{ border: "none", background: "none" }}
               >
                 Categories
-              </ScrollLink>
-            </li>
-            <li className="nav-item">
-              <ScrollLink
-                to="faq"
-                smooth={true}
-                duration={500}
-                className="nav-link"
-                style={{ cursor: "pointer" }}
-              >
-                FAQs
-              </ScrollLink>
+              </button>
             </li>
             <li className="nav-item">
               <Link to="/findjob" className="nav-link">
                 find job
               </Link>
             </li>
+            <li className="nav-item">
+              <ScrollLink
+                to="career"
+                smooth={true}
+                duration={500}
+                className="nav-link"
+                style={{ cursor: "pointer" }}
+              >
+                Career
+              </ScrollLink>
+            </li>
           </ul>
 
-          {/* Optional Search */}
-          <form className="d-flex ms-lg-3" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search jobs..."
-              aria-label="Search"
-            />
-          </form>
-          <Link
-            to="/profile"
-            className="nav-link btn border border-success text-success px-4 py-2 ms-2"
-          >
-            Profile
-          </Link>
+          <div className="d-flex align-items-center ms-auto">
+            {/* Search Form */}
+            <form className="d-flex me-3" role="search" onSubmit={handleSearch}>
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search jobs, companies, locations..."
+                aria-label="Search"
+                value={localSearchTerm}
+                onChange={(e) => setLocalSearchTerm(e.target.value)}
+              />
+            </form>
+            <Link
+              to="/profile"
+              className="btn border border-success text-success px-4 py-2 me-2"
+            >
+              Profile
+            </Link>
+            <Link
+              to="/"
+              className="btn border border-success text-success px-4 py-2"
+              onClick={async (e) => {
+                e.preventDefault();
+                try {
+                  const token = localStorage.getItem("token");
+                  const email = localStorage.getItem("userEmail");
+                  await fetch("http://localhost:3000/logout", {
+                    method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({ email }),
+                  });
 
-          <Link
-            to="/login"
-            className="nav-link btn border border-success text-success px-4 py-2 ms-2"
-          >
-            Logout
-          </Link>
+                  localStorage.clear();
+                  navigate("/");
+                } catch (err) {
+                  console.error("Logout error:", err);
+                }
+              }}
+            >
+              Logout
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

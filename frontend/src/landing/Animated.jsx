@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import landing2 from "../images/landing2.jpg";
 
-const Animated = () => {
+const Animated = ({ id }) => {
   const imageRef = useRef(null);
   const stepsRef = useRef(null);
 
@@ -29,7 +29,7 @@ const Animated = () => {
   }, []);
 
   return (
-    <div style={{ padding: "50px 20px", backgroundColor: "#f9f9f9" }}>
+    <div style={{ padding: "50px 20px", backgroundColor: "#f9f9f9" }} id={id}>
       <h1
         style={{
           textAlign: "center",

@@ -10,58 +10,64 @@ const Categories = ({ form, handleChange }) => {
         <div style={{ flex: 1, minWidth: "300px" }}>
           <label>
             <input
-              type="radio"
+              type="checkbox"
               name="category"
               value="Accounting"
-              checked={form.category === "Accounting"}
+              checked={form.category?.includes?.("Accounting") || false}
               onChange={handleChange}
             />
-            &nbsp;Accounting
+            Accounting
           </label>
-          <br /><br />
+          <br />
+          <br />
 
           <label>
             <input
-              type="radio"
+              type="checkbox"
               name="category"
               value="Adipisicing iste arc"
-              checked={form.category === "Adipisicing iste arc"}
+              checked={
+                form.category?.includes?.("Adipisicing iste arc") || false
+              }
               onChange={handleChange}
             />
             &nbsp;Adipisicing iste arc
           </label>
-          <br /><br />
+          <br />
+          <br />
 
           <label>
             <input
-              type="radio"
+              type="checkbox"
               name="category"
               value="Agriculture"
-              checked={form.category === "Agriculture"}
+              checked={form.category?.includes?.("Agriculture") || false}
               onChange={handleChange}
             />
             &nbsp;Agriculture
           </label>
-          <br /><br />
+          <br />
+          <br />
 
           <label>
             <input
-              type="radio"
+              type="checkbox"
               name="category"
               value="Commercial"
-              checked={form.category === "Commercial"}
+              checked={form.category?.includes?.("Commercial") || false}
               onChange={handleChange}
             />
             &nbsp;Commercial
           </label>
-          <br /><br />
+          <br />
+          <br />
 
           <label>
             <input
-              type="radio"
+              type="checkbox"
               name="category"
               value="IT & Telecom"
-              checked={form.category === "IT & Telecom"}
+              checked={form.category?.includes?.("IT & Telecom") || false}
               onChange={handleChange}
             />
             &nbsp;IT & Telecom
@@ -72,46 +78,51 @@ const Categories = ({ form, handleChange }) => {
         <div style={{ flex: 1, minWidth: "300px" }}>
           <label>
             <input
-              type="radio"
+              type="checkbox"
               name="category"
               value="Neque voluptas ea id"
-              checked={form.category === "Neque voluptas ea id"}
+              checked={
+                form.category?.includes?.("Neque voluptas ea id") || false
+              }
               onChange={handleChange}
             />
             &nbsp;Neque voluptas ea id
           </label>
-          <br /><br />
+          <br />
+          <br />
 
           <label>
             <input
-              type="radio"
+              type="checkbox"
               name="category"
               value="Sales & Marketing"
-              checked={form.category === "Sales & Marketing"}
+              checked={form.category?.includes?.("Sales & Marketing") || false}
               onChange={handleChange}
             />
             &nbsp;Sales & Marketing
           </label>
-          <br /><br />
+          <br />
+          <br />
 
           <label>
             <input
-              type="radio"
+              type="checkbox"
               name="category"
               value="Support Service"
-              checked={form.category === "Support Service"}
+              checked={form.category?.includes?.("Support Service") || false}
               onChange={handleChange}
             />
             &nbsp;Support Service
           </label>
-          <br /><br />
+          <br />
+          <br />
 
           <label>
             <input
-              type="radio"
+              type="checkbox"
               name="category"
               value="test categories"
-              checked={form.category === "test categories"}
+              checked={form.category?.includes?.("test categories") || false}
               onChange={handleChange}
             />
             &nbsp;test categories
